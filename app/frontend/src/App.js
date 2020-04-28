@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
-import SneakerList from './components/SneakerList';
+import HomePage from './pages/HomePage';
+import BrandPage from './pages/BrandPage';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 const App = () => {
+
+
   return (
-    <>
+    
+    <Router>
       <Navbar></Navbar>
-      <h2 className="text-center my-5 display-4">Les 50 dernières releases</h2>
-      <SneakerList></SneakerList>
-    </>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/:brand" component={BrandPage} />
+      </Switch>
+    </Router> 
+
   );
 }
 

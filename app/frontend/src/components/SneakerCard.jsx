@@ -3,8 +3,8 @@ import React from 'react';
 const SneakerCard = ({brand, retailPrice, title, image, year}) => {
     return ( 
         <div className="col-2">
-            <div className="card">
-                <img className="card-img-top p-3" src={image} alt="Card image cap" />
+            <div className="card my-2">
+                <img className="card-img-top p-3" src={image || "http://place-hold.it/150x100"} alt="Card image cap" />
                 <div className="card-body">
                     <p className="card-text">{brand}</p>
                     <h5 className="card-title">{title}</h5>
