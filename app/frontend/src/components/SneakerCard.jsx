@@ -1,6 +1,8 @@
 import React from 'react';
+import ToSlug from '../services/ToSlug';
 
 const SneakerCard = ({brand, retailPrice, title, image, year}) => {
+    let slug = "https://stockx.com/" + ToSlug(title);
     return ( 
         <div className="col-2">
             <div className="card my-2">
@@ -10,7 +12,7 @@ const SneakerCard = ({brand, retailPrice, title, image, year}) => {
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">Année : {year}</p>
                     <p className="card-text">{retailPrice} &euro;</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                    <a href={slug} target="_blank" className="btn btn-primary">Aller vers stockX</a>
                 </div>
             </div>
         </div>

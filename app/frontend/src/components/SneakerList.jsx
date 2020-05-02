@@ -4,10 +4,13 @@ import SneakersAPI from '../services/SneakersAPI';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Field from './Field';
+import Pagination from '../components/Pagination';
 
 const SneakerList = ({brand}) => {
 
     const [sneakers, setSneakers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     const fetchSneakers = async () => {
         try{   
@@ -27,6 +30,7 @@ const SneakerList = ({brand}) => {
 
   const handleSearch = ({currentTarget}) => {
     setSearch(currentTarget.value);
+    setCurrentPage(1);
   }
 
     // Filtrage des customers selon la recherche
@@ -40,6 +44,16 @@ const SneakerList = ({brand}) => {
         fetchSneakers();
     },[brand])
 
+    // Gestion du changement de page
+    const handlePageChange = page => setCurrentPage(page);
+
+    // Pagination des données
+    const paginatedSneakers = Pagination.getData(
+        filteredSneakers,
+        currentPage,
+        itemsPerPage
+    );
+
     return ( 
         <>
             <Field 
@@ -51,7 +65,7 @@ const SneakerList = ({brand}) => {
             />
             <div className="mx-5">
                 <div className="row">
-                    {filteredSneakers.map(sneaker => <SneakerCard 
+                    {paginatedSneakers.map(sneaker => <SneakerCard 
                         key={sneaker.id} 
                         title={sneaker.title} 
                         brand={sneaker.brand} 
@@ -61,6 +75,13 @@ const SneakerList = ({brand}) => {
                     />)}
                 </div>
             </div>
+            
+            <Pagination
+                currentPage={currentPage} 
+                itemsPerPage={itemsPerPage} 
+                onPageChanged={handlePageChange} 
+                length={filteredSneakers.length} 
+            />
         </>
     );
 }
