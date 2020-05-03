@@ -3,6 +3,7 @@ import ToSlug from '../services/ToSlug';
 
 const SneakerCard = ({brand, retailPrice, title, image, year}) => {
     let slug = "https://stockx.com/" + ToSlug(title);
+    
     return ( 
         <div className="col-2">
             <div className="card my-2">

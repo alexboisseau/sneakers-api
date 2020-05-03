@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Fonction faisant appel au back qui lui va faire un appel à la véritable API pour récupérer les 50 dernières sneakers
 function fetchSneakers(){
     return axios
         .get("http://localhost:5000/api/sneakers")
@@ -7,6 +8,8 @@ function fetchSneakers(){
         
 }
 
+// Fonction faisant appel au back qui lui va faire un appel à la véritable API en lui passant en paramètre une marque pour récupérer
+// les dernières 50 dernières chaussures de la marque en question
 function fetchSneakersByBrand(brand){
     return axios
         .get("http://localhost:5000/api/sneakers/" + brand)

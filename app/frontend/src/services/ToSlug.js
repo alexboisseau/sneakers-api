@@ -1,3 +1,4 @@
+// Fonction qui va transformer une chaîne de caractère en slug pour avoir un lien vers StockX fonctionnel
 function string_to_slug (str) {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();

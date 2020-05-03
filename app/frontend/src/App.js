@@ -5,10 +5,7 @@ import BrandPage from './pages/BrandPage';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 const App = () => {
-
-
-  return (
-    
+  return (  
     <Router>
       <Navbar />
       <Switch>
@@ -16,9 +13,7 @@ const App = () => {
         <Route exact path="/:brand" component={BrandPage} />
       </Switch>
     </Router> 
-
   );
 }
-
 
 export default App;
