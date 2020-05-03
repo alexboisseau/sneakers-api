@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Navbar = (props) => {      
+const Navbar = (props) => (   
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container">
             <Link className="navbar-brand" to="/">Sneakers API</Link>
@@ -21,6 +21,6 @@ const Navbar = (props) => {
             </div>
         </div>
     </nav>
-}
+)
  
 export default Navbar;

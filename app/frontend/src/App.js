@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import BrandPage from './pages/BrandPage';

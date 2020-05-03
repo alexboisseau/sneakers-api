@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SneakerCard from './SneakerCard';
 import SneakersAPI from '../services/SneakersAPI';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import Field from './Field';
 import Pagination from '../components/Pagination';
 

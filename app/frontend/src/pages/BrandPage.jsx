@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SneakerList from '../components/SneakerList';
 
 const BrandPage = ({match}) => {
