@@ -1,25 +1,9 @@
-import React from 'react';
-import { LOGIN_API } from './config';
+import axios from 'axios'
 
-function logout() {
-    window.localStorage.removeItem("authToken");
-    delete axios.defaults.headers["Authorization"];
+function login(credentials) {
+    return axios.post("http://localhost:5000/api/users/login", credentials)
 }
 
-function setAxiosToken(token){
-    axios.defaults.headers["Authorization"] = "Bearer " + token;
-}
-
-function authenticate (credentials) {
-
-    return axios
-        .post(LOGIN_API, credentials)
-        .then(response => response.data.token)
-        .then(token => {
-            //Stockage du token dans le localStorage
-            window.localStorage.setItem('authToken', token);
-        
-            //On prévient Axios qu'on a maintent un token a rajouter dans le header de nos futures requêtes
-            setAxiosToken(token);
-        })
+export default {
+    login
 }

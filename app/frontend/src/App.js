@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import { useAuth } from './hooks/AuthHook'
 import { AuthContext } from './contexts/AuthContext'
+import AccountPage from './pages/AccountPage'
 
 const App = () => {
   const { token, login, logout, userId } = useAuth()
@@ -14,8 +15,9 @@ const App = () => {
   if (token) {
     routes = (
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/account" component={AccountPage} />
         <Route exact path="/:brand" component={BrandPage} />
+        <Route exact path="/" component={HomePage} />
       </Switch>
     )
   } else {

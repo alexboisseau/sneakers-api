@@ -40,7 +40,8 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    'mongodb+srv://tlnkorr:thomaslenaour@cluster0-tdkyv.mongodb.net/sneakers?retryWrites=true&w=majority'
+    'mongodb+srv://boiss:HF5UJHUY3k8aY3wh@cluster0-tdkyv.mongodb.net/sneakers?retryWrites=true&w=majority',
+    { useNewUrlParser: true }
   )
   .then(() => app.listen(5000))
   .catch(error => console.log(error))

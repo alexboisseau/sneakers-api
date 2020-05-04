@@ -5,6 +5,18 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const HttpError = require('../models/http-error')
 
+const getUserById = async (req, res, next) => {
+  
+  const { uid } = req.params
+  
+  try {
+    user = await User.findById(uid)
+    res.json({user})
+  } catch (err) {
+    return next(new HttpError('Il y a une erreur.', 500))
+  }
+}
+
 const signup = async (req, res, next) => {
   const errors = validationResult(req)
 
@@ -130,3 +142,4 @@ exports.signup = signup
 exports.login = login
 exports.updateUser = updateUser
 exports.getFavoritesSneakers = getFavoritesSneakers
+exports.getUserById = getUserById

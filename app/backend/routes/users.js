@@ -17,6 +17,8 @@ router.post(
   usersController.signup
 )
 
+router.get('/:uid', usersController.getUserById)
+
 router.post('/login', usersController.login)
 
 router.use(checkAuth)

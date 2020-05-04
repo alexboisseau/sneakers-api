@@ -1,12 +1,18 @@
 import React, { useState, useContext } from 'react'
 import Field from '../components/Field'
+import {AuthContext} from '../contexts/AuthContext';
+import AuthAPI from '../services/AuthAPI';
 
-const LoginPage = () => {
+const LoginPage = ({history}) => {
+	
 	const [credentials, setCredentials] = useState({
-		username: '',
+		email: '',
 		password: ''
 	})
-	const [errorLogin, setErrorLogin] = useState('d-none')
+
+	const [errorLogin, setErrorLogin] = useState("d-none")
+	
+	const auth = useContext(AuthContext)
 
 	// Gestion des champs
 	const handleChange = ({ currentTarget }) => {
@@ -17,20 +23,30 @@ const LoginPage = () => {
 
 	// Gestion du submit
 	const handleSubmit = async (event) => {
-		event.preventDefault()
+        event.preventDefault()
+        
+        try{
+			const responseData = await AuthAPI.login(credentials)
+			setErrorLogin("d-none");
+			auth.login(responseData.data.userId, responseData.data.token);
+			history.replace("/")
+
+		} catch(error){
+			setErrorLogin("");
+			// TODO TOAST
+			console.log(error.response)
+		}
 	}
 
 	return (
 		<>
 			<div className="container my-5">
 				<h1 className="text-center my-5">Connexion à l'application</h1>
-
-				<p className={`my-3 text-danger ${errorLogin}`}>
-					Les informations de connexion sont invalides !
-				</p>
+				<p className={`my-3 text-danger ${errorLogin}`}>Les informations de connexion sont invalides !</p>
 				<form onSubmit={handleSubmit}>
+					
 					<Field
-						name="username"
+						name="email"
 						label="Adresse Email"
 						value={credentials.username}
 						onChange={handleChange}
@@ -51,6 +67,7 @@ const LoginPage = () => {
 							Connexion
 						</button>
 					</div>
+
 				</form>
 			</div>
 		</>

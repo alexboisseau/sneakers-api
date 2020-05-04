@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Field = ({name, label, value, onChange, placeholder = "", type = "text"}) => (
+    
     <div className="container">
         <div className="form-group">
             <label htmlFor={name}>{label}</label>

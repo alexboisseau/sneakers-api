@@ -1,4 +1,5 @@
 import { useEffect, useCallback, useState } from 'react'
+import axios from "axios"
 
 let logoutTimer
 
@@ -6,6 +7,10 @@ export const useAuth = () => {
   const [token, setToken] = useState()
   const [tokenExpirationDate, setTokenExpirationDate] = useState()
   const [userId, setUserId] = useState(false)
+
+  const setAxiosToken = (token) => {
+    axios.defaults.headers["Authorization"] = "Bearer " + token;
+  } 
 
   const login = useCallback((uid, token, expirationDate) => {
     setToken(token)
@@ -21,7 +26,9 @@ export const useAuth = () => {
         expiration: tokenExpirationDate.toISOString()
       })
     )
+    setAxiosToken(token)
   }, [])
+
 
   const logout = useCallback(() => {
     setToken(null)
