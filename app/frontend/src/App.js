@@ -4,17 +4,40 @@ import HomePage from './pages/HomePage';
 import BrandPage from './pages/BrandPage';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import { useAuth } from './hooks/AuthHook'
+import { AuthContext } from './contexts/AuthContext'
 
 const App = () => {
-  return (  
-    <Router>
-      <Navbar />
+  const { token, login, logout, userId } = useAuth()
+  let routes
+
+  if (token) {
+    routes = (
       <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/:brand" component={BrandPage} />
+      </Switch>
+    )
+  } else {
+    routes = (
+      <Switch>
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/:brand" component={BrandPage} />
-        <Route exact path="/" component={HomePage} />
       </Switch>
-    </Router> 
+    )
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{ isLoggedIn: !!token, token, userId, login, logout }}>
+      <Router>
+        <Navbar />
+        <main>
+          {routes}
+        </main>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 
