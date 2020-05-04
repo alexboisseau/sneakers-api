@@ -6,15 +6,16 @@ const User = require('../models/user')
 const HttpError = require('../models/http-error')
 
 const getUserById = async (req, res, next) => {
-  
   const { uid } = req.params
-  
+
+  let user
   try {
-    user = await User.findById(uid)
-    res.json({user})
+    user = await User.findById(uid, '-password')
   } catch (err) {
     return next(new HttpError('Il y a une erreur.', 500))
   }
+
+  res.json({ user: user.toObject({ getters: true }) })
 }
 
 const signup = async (req, res, next) => {

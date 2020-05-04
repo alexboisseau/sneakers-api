@@ -1,19 +1,17 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { NavLink } from 'react-router-dom';
+
+import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 
 const Navbar = (props) => {
-	
 	const auth = useContext(AuthContext)
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
-				
-				<Link className="navbar-brand" to="/">
+				<NavLink className="navbar-brand" to="/">
 					Sneakers API
-				</Link>
+				</NavLink>
 
 				<button
 					className="navbar-toggler"
@@ -28,57 +26,58 @@ const Navbar = (props) => {
 				</button>
 
 				<div className="collapse navbar-collapse" id="navbar">
-					
 					<ul className="navbar-nav mr-auto">
-						<Link to="/nike" className="nav-link">
+						<NavLink to="/nike" className="nav-NavLink">
 							Nike
-						</Link>
-						<Link to="/adidas" className="nav-link">
+						</NavLink>
+						<NavLink to="/adidas" className="nav-NavLink">
 							Adidas
-						</Link>
-						<Link to="/jordan" className="nav-link">
+						</NavLink>
+						<NavLink to="/jordan" className="nav-NavLink">
 							Jordan
-						</Link>
-						<Link to="/puma" className="nav-link">
+						</NavLink>
+						<NavLink to="/puma" className="nav-NavLink">
 							Puma
-						</Link>
-						<Link to="/saucony" className="nav-link">
+						</NavLink>
+						<NavLink to="/saucony" className="nav-NavLink">
 							Saucony
-						</Link>
+						</NavLink>
 					</ul>
 
 					<ul className="navbar-nav ml-auto">
-                    	{(!auth.isLoggedIn && (
-                        	<>
+						{(!auth.isLoggedIn && (
+							<>
 								<li className="nav-item">
 									<NavLink to="/login" className="btn btn-light">
 										Connexion
 									</NavLink>
-								</li> 
-                        	</>
-                    	)) || (
-                        	<>
+								</li>
+								<li className="nav-item">
+									<NavLink to="/register" className="ml-3 btn btn-light">
+										Inscription
+									</NavLink>
+								</li>
+							</>
+						)) || (
+							<>
 								<li className="nav-item mx-2">
 									<NavLink to="/account" className="btn btn-light">
 										Mon compte
 									</NavLink>
-								</li> 
+								</li>
 								<li className="nav-item mx-2">
 									<NavLink to="/mysneakers" className="btn btn-success">
 										Mes Sneakers
 									</NavLink>
 								</li> 
 								<li className="nav-item mx-2">
-									<button
-										onClick={auth.logout}
-										className="btn btn-danger">
+									<button onClick={auth.logout} className="btn btn-danger">
 										Déconnexion
 									</button>
 								</li>
-                        	</>
-                    	)}
-                	</ul>
-					
+							</>
+						)}
+					</ul>
 				</div>
 			</div>
 		</nav>
