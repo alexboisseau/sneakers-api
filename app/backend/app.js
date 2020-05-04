@@ -1,8 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 const HtppError = require('./models/http-error')
 const sneakersRoutes = require('./routes/sneakers')
+const usersRoutes = require('./routes/users')
 
 const app = express()
 
@@ -19,11 +21,11 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json())
 
-
 app.use('/api/sneakers', sneakersRoutes)
+app.use('/api/users', usersRoutes)
 
 app.use((req, res, next) => {
-  throw new HtppError('Cette route n\'existe pas.', 404)
+  throw new HtppError("Cette route n'existe pas.", 404)
 })
 
 app.use((error, req, res, next) => {
@@ -31,7 +33,14 @@ app.use((error, req, res, next) => {
     return next(error)
   }
 
-  res.status(error.code || 500).json({message: error.message || 'Une erreur s\'est produite.'})
+  res
+    .status(error.code || 500)
+    .json({ message: error.message || "Une erreur s'est produite." })
 })
 
-app.listen(5000)
+mongoose
+  .connect(
+    'mongodb+srv://tlnkorr:thomaslenaour@cluster0-tdkyv.mongodb.net/sneakers?retryWrites=true&w=majority'
+  )
+  .then(() => app.listen(5000))
+  .catch(error => console.log(error))
