@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import { useAuth } from './hooks/AuthHook'
 import { AuthContext } from './contexts/AuthContext'
 import AccountPage from './pages/AccountPage'
+import FavoritesSneakersPage from './pages/FavoritesSneakersPage';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth()
@@ -16,6 +17,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route exact path="/account" component={AccountPage} />
+        <Route exact path="/mysneakers" component={FavoritesSneakersPage} />
         <Route exact path="/:brand" component={BrandPage} />
         <Route exact path="/" component={HomePage} />
       </Switch>

@@ -18,9 +18,11 @@ const SneakerList = ({brand}) => {
             if(brand){
                 const data = await SneakersAPI.fetchSneakersByBrand(brand);
                 setSneakers(data);
+                console.log(data)
             } else {
                 const data = await SneakersAPI.fetchSneakers();
                 setSneakers(data);
+                console.log(data)
             }
         } catch(error){
 
@@ -73,6 +75,7 @@ const SneakerList = ({brand}) => {
                             image={sneaker.media.smallImageUrl} 
                             retailPrice={sneaker.retailPrice} 
                             year={sneaker.year}
+                            sneaker={sneaker}
                         />
                     )}
                 </div>

@@ -64,6 +64,11 @@ const Navbar = (props) => {
 									</NavLink>
 								</li> 
 								<li className="nav-item mx-2">
+									<NavLink to="/mysneakers" className="btn btn-success">
+										Mes Sneakers
+									</NavLink>
+								</li> 
+								<li className="nav-item mx-2">
 									<button
 										onClick={auth.logout}
 										className="btn btn-danger">
