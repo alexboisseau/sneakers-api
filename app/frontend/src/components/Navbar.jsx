@@ -27,19 +27,19 @@ const Navbar = (props) => {
 
 				<div className="collapse navbar-collapse" id="navbar">
 					<ul className="navbar-nav mr-auto">
-						<NavLink to="/nike" className="nav-NavLink">
+						<NavLink to="/nike" className="nav-link">
 							Nike
 						</NavLink>
-						<NavLink to="/adidas" className="nav-NavLink">
+						<NavLink to="/adidas" className="nav-link">
 							Adidas
 						</NavLink>
-						<NavLink to="/jordan" className="nav-NavLink">
+						<NavLink to="/jordan" className="nav-link">
 							Jordan
 						</NavLink>
-						<NavLink to="/puma" className="nav-NavLink">
+						<NavLink to="/puma" className="nav-link">
 							Puma
 						</NavLink>
-						<NavLink to="/saucony" className="nav-NavLink">
+						<NavLink to="/saucony" className="nav-link">
 							Saucony
 						</NavLink>
 					</ul>
