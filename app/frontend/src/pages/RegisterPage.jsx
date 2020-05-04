@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
 import Field from '../components/Field'
 import { AuthContext } from '../contexts/AuthContext'
-import AuthAPI from '../services/AuthAPI'
+import UsersAPI from '../services/UsersAPI'
 
-const LoginPage = ({ history }) => {
+const RegisterPage = ({ history }) => {
 	const [credentials, setCredentials] = useState({
+		name: '',
 		email: '',
 		password: ''
 	})
@@ -22,8 +23,7 @@ const LoginPage = ({ history }) => {
 		event.preventDefault()
 
 		try {
-			const responseData = await AuthAPI.login(credentials)
-
+			const responseData = await UsersAPI.create(credentials)
 			setErrorLogin('d-none')
 			auth.login(responseData.data.userId, responseData.data.token)
 			history.replace('/')
@@ -35,11 +35,20 @@ const LoginPage = ({ history }) => {
 
 	return (
 		<div className="container my-5">
-			<h1 className="text-center my-5">Connexion à l'application</h1>
+			<h1 className="text-center my-5">Inscription</h1>
 			<p className={`my-3 text-danger ${errorLogin}`}>
-				Les informations de connexion sont invalides !
+				Les informations sont invalides !
 			</p>
 			<form onSubmit={handleSubmit}>
+				<Field
+					name="name"
+					label="Nom"
+					value={credentials.name}
+					onChange={handleChange}
+					placeholder="Nom"
+					type="text"
+				/>
+
 				<Field
 					name="email"
 					label="Adresse Email"
@@ -56,10 +65,9 @@ const LoginPage = ({ history }) => {
 					onChange={handleChange}
 					type="password"
 				/>
-
 				<div className="form-group">
 					<button type="submit" className="btn btn-primary">
-						Connexion
+						Inscription
 					</button>
 				</div>
 			</form>
@@ -67,4 +75,4 @@ const LoginPage = ({ history }) => {
 	)
 }
 
-export default LoginPage
+export default RegisterPage
