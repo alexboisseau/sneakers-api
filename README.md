@@ -9,6 +9,6 @@ De plus, nous avons mis en place une base de données sur MongoDB qui va nous pe
 # Getting started
 
 - Cloner le repository
-- Aller dans le dossier `frontend` et exécuter la commande `npm install` puis `serve -g build`
+- Aller dans le dossier `frontend` et exécuter la commande `npm install` puis `npm start` pour lancer le serveur (en développement)
 - Aller dans le dossier `backend` et exécuter la commande `npm install` puis `node app.js`
 - Enjoy!
