@@ -2,9 +2,16 @@ import React, { useContext } from 'react'
 
 import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
+import { useHistory } from 'react-router-dom'
 
 const Navbar = (props) => {
 	const auth = useContext(AuthContext)
+	const history = useHistory()
+
+	const handleLogout = () => {
+		auth.logout()
+		history.push('/')
+	}
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -69,9 +76,9 @@ const Navbar = (props) => {
 									<NavLink to="/mysneakers" className="btn btn-success">
 										Mes Sneakers
 									</NavLink>
-								</li> 
+								</li>
 								<li className="nav-item mx-2">
-									<button onClick={auth.logout} className="btn btn-danger">
+									<button onClick={handleLogout} className="btn btn-danger">
 										Déconnexion
 									</button>
 								</li>
