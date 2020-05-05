@@ -9,6 +9,8 @@ import { AuthContext } from './contexts/AuthContext'
 import AccountPage from './pages/AccountPage'
 import FavoritesSneakersPage from './pages/FavoritesSneakersPage';
 import RegisterPage from './pages/RegisterPage'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth()
@@ -35,15 +37,16 @@ const App = () => {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ isLoggedIn: !!token, token, userId, login, logout }}>
-      <Router>
-        <Navbar />
-        <main>
-          {routes}
-        </main>
-      </Router>
-    </AuthContext.Provider>
+      <AuthContext.Provider
+        value={{ isLoggedIn: !!token, token, userId, login, logout }}>
+        <Router>
+          <Navbar />
+          <main>
+            {routes}
+          </main>
+        </Router>
+        <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
+      </AuthContext.Provider>
   );
 }
 

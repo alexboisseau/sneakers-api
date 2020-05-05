@@ -1,5 +1,6 @@
 import { useEffect, useCallback, useState } from 'react'
 import axios from "axios"
+import {toast} from 'react-toastify'
 
 let logoutTimer
 
@@ -35,6 +36,7 @@ export const useAuth = () => {
     setTokenExpirationDate(null)
     setUserId(null)
     localStorage.removeItem('userData')
+    toast.success("Vous êtes bien deconnecté ✅")
   }, [])
 
   useEffect(() => {

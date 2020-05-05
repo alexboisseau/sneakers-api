@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import Field from '../components/Field'
 import { AuthContext } from '../contexts/AuthContext'
 import UsersAPI from '../services/UsersAPI'
+import {toast} from 'react-toastify'
 
 const RegisterPage = ({ history }) => {
 	const [credentials, setCredentials] = useState({
@@ -26,10 +27,11 @@ const RegisterPage = ({ history }) => {
 			const responseData = await UsersAPI.create(credentials)
 			setErrorLogin('d-none')
 			auth.login(responseData.data.userId, responseData.data.token)
+			toast.success("Votre compte a bien été crée. Vous êtes maintenant connecté ✅")
 			history.replace('/')
 		} catch (error) {
 			setErrorLogin('')
-			console.log(error.response)
+			toast.success("Une erreur est survenue ❌")
 		}
 	}
 

@@ -1,8 +1,9 @@
-import React, {useContext, useState} from 'react';
-import {AuthContext} from '../contexts/AuthContext';
-import Field from '../components/Field';
-import UsersAPI from '../services/UsersAPI';
-import { useEffect } from 'react';
+import React, {useContext, useState} from 'react'
+import {AuthContext} from '../contexts/AuthContext'
+import Field from '../components/Field'
+import UsersAPI from '../services/UsersAPI'
+import { useEffect } from 'react'
+import {toast} from 'react-toastify'
 
 const AccountPage = () => {
     
@@ -20,13 +21,13 @@ const AccountPage = () => {
     // Permet d'aller récupérer l'utilisateur connecté
     const fetchUser = async () => {
         try {
-            const data = await UsersAPI.fetchUser(auth.userId).then(response => response.data.user);
+            const data = await UsersAPI.fetchUser(auth.userId).then(response => response.data.user)
             setUser({
                 name: data.name,
                 email: data.email
             })
         } catch (error) {
-            console.log("error")
+            toast.error("Une erreur est survenue ❌")
         }
     }
 
@@ -38,45 +39,41 @@ const AccountPage = () => {
     }
     
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         try{
-            const data = await UsersAPI.update(auth.userId, user)
-            console.log(data)
-            //TODO
+            await UsersAPI.update(auth.userId, user)
+            toast.success("Votre profil a bien été modifié ✅")
         } catch(error){
-            console.log(error)
-            // TODO 
+            toast.error("Une erreur est survenue ❌")
         }
     }
 
     return ( 
-        <>
-            <form onSubmit={handleSubmit} className="container">
-                <h2 className="text-center my-5 display-4">Changer les paramètres de mon compte 🛠</h2>
-                <Field
-                    name="name"
-                    label="Nom & Prénom"
-                    value={user.name}
-                    onChange={handleChange}
-                    placeholder="Adresse email de connexion"
-                />
-                <Field
-                    name="email"
-                    label="Adresse Email"
-                    value={user.email}
-                    onChange={handleChange}
-                    placeholder="Adresse email de connexion"
-                    type="email"
-                />
+        <form onSubmit={handleSubmit} className="container">
+            <h2 className="text-center my-5 display-4">Changer les paramètres de mon compte 🛠</h2>
+            <Field
+                name="name"
+                label="Nom & Prénom"
+                value={user.name}
+                onChange={handleChange}
+                placeholder="Adresse email de connexion"
+            />
+            <Field
+                name="email"
+                label="Adresse Email"
+                value={user.email}
+                onChange={handleChange}
+                placeholder="Adresse email de connexion"
+                type="email"
+            />
 
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
-                        Enregistrer
-                    </button>
-                </div>
-            </form>
-        </>
+            <div className="form-group">
+                <button type="submit" className="btn btn-primary">
+                    Enregistrer
+                </button>
+            </div>
+        </form>
     );
 }
  

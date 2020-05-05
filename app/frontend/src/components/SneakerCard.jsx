@@ -1,15 +1,18 @@
-import React, {useContext} from 'react';
-import FavoritesSneakers from '../services/FavoritesSneakersAPI';
-import {AuthContext} from '../contexts/AuthContext'
+import React from 'react'
+import FavoritesSneakersAPI from '../services/FavoritesSneakersAPI'
+import toSlug from '../services/ToSlug'
+import {toast} from 'react-toastify'
 
 const SneakerCard = ({brand, retailPrice, title, image="http://placeholdit/300x300", year, sneaker}) => {
     
+    const stockXUrl = toSlug(title)
+
     const handleClick = async () => {
         try{
-            const data = await FavoritesSneakers.add(sneaker)
+            await FavoritesSneakersAPI.add(sneaker)
+            toast.success("La paire a été ajoutée à votre sélection ✅")
         } catch(error){
-            console.log(error.response)
-            
+            toast.error("Une erreur est survenue ❌")
         }
     }
 
@@ -22,7 +25,7 @@ const SneakerCard = ({brand, retailPrice, title, image="http://placeholdit/300x3
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">Année : {year}</p>
                     <p className="card-text">{retailPrice} &euro;</p>
-                    <a href="www.google.com" className="btn btn-primary">Vers StockX</a>
+                    <a href={`https://stockx.com/${stockXUrl}`} rel="noopener noreferrer" target="_blank" className="btn btn-primary mb-2">Vers StockX</a>
                     <button onClick={handleClick} type="button" className="btn btn-primary">Ajouter à ma sélection</button>
                 </div>
             </div>

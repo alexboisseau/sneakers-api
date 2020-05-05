@@ -2,7 +2,7 @@ import React from 'react';
 import SneakerList from '../components/SneakerList';
 
 const BrandPage = ({match}) => {
-    const {brand} = match.params;
+    const {brand} = match.params
 
     return ( 
         <>
